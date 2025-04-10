@@ -51,10 +51,7 @@ struct ContentView: View {
                         }
                     }
                     .contentShape(Rectangle()) // makes entire view tappable
-                    .gestureControls(showMenu: $showMenu)
-                    .sheet(isPresented: $showMenu) {
-                        MenuView()
-                    }
+                    
 //                    .highPriorityGesture(
 //                        TapGesture(count: 2)
 //                            .onEnded {
