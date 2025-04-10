@@ -51,54 +51,12 @@ struct ContentView: View {
                         }
                     }
                     .contentShape(Rectangle()) // makes entire view tappable
-                    
-//                    .highPriorityGesture(
-//                        TapGesture(count: 2)
-//                            .onEnded {
-//                                exitApp()
-//                            }
-//                    )
-//                    .onTapGesture {
-//                        // stopTimer()
-//                        // exitFullScreen()
-//                        // NSApplication.shared.terminate(nil)
-//                        // toggleFullScreen()
-//                        tapCount += 1
-//                        tapTimer?.invalidate()
-//
-//                        tapTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
-//                            if tapCount == 1 {
-//                                toggleFullScreen()
-//                            } else if tapCount >= 2 {
-//                                exitApp()
-//                            }
-//                            tapCount = 0
-//                        }
-//                    }
-//                    .gesture(
-//                        DragGesture()
-//                            .onChanged { value in
-//                                dragOffset = value.translation
-//                                print("Dragging: \(dragOffset)") // Debug
-//                            }
-//                            .onEnded { value in
-////                                if value.translation.width < -50 {
-////                                    // Swipe left
-////                                    currentIndex = (currentIndex + 1) % imageURLs.count
-////                                } else if value.translation.width > 50 {
-////                                    // Swipe right
-////                                    currentIndex = (currentIndex - 1 + imageURLs.count) % imageURLs.count
-////                                }
-//
-//                                        if abs(value.translation.height) > 50 {
-//                                            showMenu = true
-//                                    }
-//                            },
-//                        including: .gesture
-//                    )
-//                    .sheet(isPresented: $showMenu) {
-//                        MenuView()
-//                    }
+                    .onTapGesture {
+                        // stopTimer()
+                        // exitFullScreen()
+                        // NSApplication.shared.terminate(nil)
+                        toggleFullScreen()
+                    }
                 }
             } else {
                 Button("Select Folder of Images") {
