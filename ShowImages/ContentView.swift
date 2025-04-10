@@ -20,18 +20,12 @@ struct ContentView: View {
     
     @State private var dragOffset: CGSize = .zero
     @State private var showMenu = false
-    
+    @State private var menuRecentlyClosed = false
     
     let interval: Double = 1
     
     // let folderPath = "/Volumes/u/images/test"
 
-//    let drag = DragGesture()
-//        .onEnded { value in
-//            if value.translation.height > 50 {
-//                showMenu = true
-//            }
-//        }
 
     
     var body: some View {
@@ -51,9 +45,20 @@ struct ContentView: View {
                         }
                     }
                     .contentShape(Rectangle()) // makes entire view tappable
-                    .gestureControls(showMenu: $showMenu)
+                    .gesture(
+                        DragGesture()
+                            .onEnded { value in
+                                guard !menuRecentlyClosed else { return }
+
+                                print("[Drag] value: \(value)")
+                                if abs(value.translation.height) > 50 {
+                                    showMenu = true
+                                }
+                            }
+                    )
                     .sheet(isPresented: $showMenu) {
-                        MenuView()
+                        // MenuView(isPresented: $showMenu)
+                        MenuView(isPresented: $showMenu, onClose: setMenuCooldown)
                     }
                 }
             } else {
@@ -131,6 +136,16 @@ struct ContentView: View {
         timer?.invalidate()
         timer = nil
     }
+    
+    func setMenuCooldown() {
+        menuRecentlyClosed = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            menuRecentlyClosed = false
+        }
+    }
+    
+    
+    
 }
 
 #Preview {
