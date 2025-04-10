@@ -51,11 +51,9 @@ struct ContentView: View {
                         }
                     }
                     .contentShape(Rectangle()) // makes entire view tappable
-                    .onTapGesture {
-                        // stopTimer()
-                        // exitFullScreen()
-                        // NSApplication.shared.terminate(nil)
-                        toggleFullScreen()
+                    .gestureControls(showMenu: $showMenu)
+                    .sheet(isPresented: $showMenu) {
+                        MenuView()
                     }
                 }
             } else {
